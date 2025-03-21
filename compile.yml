@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  platform-compiler:
+    image: maven:3.5.2-jdk-8-alpine
+    container_name: platform-compiler
+    hostname: platform-compiler
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - ./docker-deps/m2config:/root/.m2
+      - ./docker-deps/libs:/root/.m2/repository/com/quicksand/bigdata
+      - ../bdt-metric-stitcher:/home/bdt-metric-stitcher
+    stdin_open: true
+    tty: true
+    working_dir:
+      /home/bdt-metric-stitcher
+    entrypoint: [ "sh", "./compile-java.sh" ]

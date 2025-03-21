@@ -1,0 +1,1 @@
+mvn clean  && mvn package -DskipTests=true && docker rm -f metric-stitcher && docker rmi -f metric-stitcher:1.0 && docker compose up metric-stitcher &

@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+
+  m3sql:
+    image: mysql:8.0
+    container_name: m3sql
+    hostname: m3sql
+    deploy:
+      resources:
+        limits:
+          cpus: '1.00'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 64M
+    environment:
+      MYSQL_ROOT_PASSWORD: m3mysql
+      MYSQL_DATABASE: db_metric_management
+      MYSQL_USER: metric_management
+      MYSQL_PASSWORD: metric_management
+      MYSQL_TCP_PORT: 9918
+    #    volumes:
+    #      - /tmp:/tmp
+    ports:
+      - "9918:9918"
+    networks:
+      devnws:
+        ipv4_address: 192.168.10.100
+
+  m2redis:
+    image: redis:3.2
+    container_name: m2redis
+    hostname: m2redis
+    deploy:
+      resources:
+        limits:
+          cpus: '1.00'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 64M
+    #    volumes:
+    #      - /tmp:/tmp
+    ports:
+      - "6379:6379"
+    networks:
+      devnws:
+        ipv4_address: 192.168.10.101
+
+# docker network create --driver=bridge --subnet=192.168.10.0/24 --ip-range=192.168.10.0/24 --gateway=192.168.10.1 devnws
+networks:
+  devnws:
+    external: true

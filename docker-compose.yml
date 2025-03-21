@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  metric-stitcher:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: metric-stitcher:1.0
+    container_name: metric-stitcher
+    hostname: metric-stitcher
+    environment:
+      - TZ=Asia/Shanghai
+    deploy:
+      resources:
+        limits:
+          cpus: '1.00'
+          memory: 1G
+        reservations:
+          cpus: '0.25'
+          memory: 64M
+    volumes:
+      - /tmp:/tmp
+    ports:
+      - "8800:8800"
+      - "8799:8799"
+    networks:
+      devnws:
+        ipv4_address: 192.168.10.175
+
+# docker network create --driver=bridge --subnet=192.168.10.0/24 --ip-range=192.168.10.0/24 --gateway=192.168.10.1 devnws
+networks:
+  devnws:
+    external: true

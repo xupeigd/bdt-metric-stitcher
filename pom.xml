@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.quicksand.bigdata</groupId>
+    <artifactId>metric-stitcher</artifactId>
+    <name>metric-stitcher</name>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <mybatis-plus.version>3.2.0</mybatis-plus.version>
+    </properties>
+
+    <modules>
+        <module>metric-stitcher-api</module>
+        <module>metric-stitcher-impl</module>
+    </modules>
+
+    <!-- 仓库地址 -->
+    <repositories>
+    </repositories>
+
+    <distributionManagement>
+    </distributionManagement>
+
+</project>

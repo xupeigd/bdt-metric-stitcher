@@ -1,0 +1,37 @@
+2022-12-09 19:18:59.895$$$$INFO$$bdt-metric-stitcher/reactor-http-epoll-1$$PRE-4-ff88220b-5728-4181-a69a-c320433df49f$$0$$ExplainLAServiceImpl.java/52$$---> start remoteExplain ! metridId:1092,attributes:{"metricIds":[1092],"dimensions":["group_id","shop_id","order_subtype","pt"],"condition":{"name":"pt","symbol":0,"hitValues":["20221202"]},"sorts":[{"asc":true,"name":"group_id"}]}$$
+2022-12-09 19:19:00.184$$$$INFO$$bdt-metric-stitcher/reactor-http-epoll-1$$PRE-4-ff88220b-5728-4181-a69a-c320433df49f$$0$$ExplainLAServiceImpl.java/65$$---> end remoteExplain : explain complete  ! metridId:1092,attributes:{"metricIds":[1092],"dimensions":["group_id","shop_id","order_subtype","pt"],"condition":{"name":"pt","symbol":0,"hitValues":["20221202"]},"sorts":[{"asc":true,"name":"group_id"}]},cost:289$$
+2022-12-09 19:19:00.185$$$$INFO$$bdt-metric-stitcher/TRAC-8$$PRE-4-ff88220b-5728-4181-a69a-c320433df49f$$0$$EngineLAServiceImpl.java/60$$EngineService queryAndWait start ! request:{"connectionInfo":{"name":"db_bigdata","type":1,"address":"dorisdb.warehouse.master.quicksand.com:19033","defaultDatabase":"db_bigdata","defaultSchema":"","userName":"warehouse_admin","password":"Ajk4YWNhMx","comment":"大数据标准数据集"},"templateSql":" \nSELECT \n  pt \n  , group_id \n  , shop_id \n  , order_subtype \n  , SUM(bill_no_discount_pay_cnt) AS bill_no_discount_pay_cnt \nFROM ( \n  SELECT \n    pt \n    , group_id \n    , shop_id \n    , order_subtype \n    , bill_no_discount_pay_cnt \n  FROM aggr_bill_master_sds_day on79_src_0 \n) subq_3 \nWHERE pt = '20221202' \nGROUP BY \n  pt \n  , group_id \n  , shop_id \n  , order_subtype \nORDER BY group_id \n","mode":1,"resultMode":0,"syncMills":60000,"asyncMills":60000}`$$
+2022-12-09 19:19:08.051$$$$INFO$$bdt-metric-stitcher/reactor-http-epoll-1$$PRE-4-ff88220b-5728-4181-a69a-c320433df49f$$0$$MetricQueryHandlerImpl.java/116$$
+queryMetricFunction done ! metricId:1092
+Timeline>>>
+ [TN:-- 编译sql 289ms,TN:-- 获取执行集群 0ms,TN:-- QE查询 7866ms]$$
+2022-12-09 19:19:08.051$$$$INFO$$bdt-metric-stitcher/reactor-http-epoll-1$$PRE-4-ff88220b-5728-4181-a69a-c320433df49f$$0$$MetricQueryHandlerImpl.java/146$$
+queryMetric done ! metricId:1092
+Timeline>>>
+ [TN:-- 校验配额 metricId:1092 0ms,TN:-- 指标数据查询 metricId:1092 8156ms,TN:-- log quota metricId:1092 0ms]$$
+
+
+ 2022-12-12 17:04:11.759$$$$INFO$$bdt-metric-stitcher/reactor-http-epoll-2$$PRE-1-08dc4158-9edd-42bc-b187-5b4c63ce21f8$$0$$ExplainLAServiceImpl.java/52$$---> start remoteExplain ! metridId:1018,attributes:{"metricIds":[1018],"dimensions":["pt"],"condition":{"name":"pt","symbol":10,"hitValues":["20221001"]},"sorts":[{"asc":true,"name":"pt"}]}$$
+ 2022-12-12 17:04:16.793$$$$INFO$$bdt-metric-stitcher/reactor-http-epoll-2$$PRE-1-08dc4158-9edd-42bc-b187-5b4c63ce21f8$$0$$ExplainLAServiceImpl.java/65$$---> end remoteExplain : explain complete  ! metridId:1018,attributes:{"metricIds":[1018],"dimensions":["pt"],"condition":{"name":"pt","symbol":10,"hitValues":["20221001"]},"sorts":[{"asc":true,"name":"pt"}]},cost:5034$$
+ 2022-12-12 17:04:16.844$$$$INFO$$bdt-metric-stitcher/TRAC-1$$PRE-1-08dc4158-9edd-42bc-b187-5b4c63ce21f8$$0$$EngineLAServiceImpl.java/60$$EngineService queryAndWait start ! request:{"connectionInfo":{"name":"db_bigdata","type":1,"address":"dorisdb.warehouse.master.quicksand.com:19033","defaultDatabase":"db_bigdata","defaultSchema":"","userName":"warehouse_admin","password":"Ajk4YWNhMx","comment":"大数据标准数据集"},"templateSql":" \nSELECT \n  pt \n  , SUM(bill_amt) AS bill_amt \nFROM ( \n  SELECT \n    pt \n    , bill_amt \n  FROM aggr_bill_master_sds_day on79_src_0 \n) subq_3 \nWHERE pt >= '20221001' \nGROUP BY \n  pt \nORDER BY pt \n","mode":1,"resultMode":0,"syncMills":60000,"asyncMills":60000}`$$
+ 2022-12-12 17:04:18.404$$$$INFO$$bdt-metric-stitcher/reactor-http-epoll-2$$PRE-1-08dc4158-9edd-42bc-b187-5b4c63ce21f8$$0$$MetricQueryHandlerImpl.java/116$$queryMetricFunction done ! metricId:1018 timeLine>>>
+  [TN:-- 编译sql 5037ms,TN:-- 获取执行集群 0ms,TN:-- QE查询 1609ms]$$
+ 2022-12-12 17:04:18.405$$$$INFO$$bdt-metric-stitcher/reactor-http-epoll-2$$PRE-1-08dc4158-9edd-42bc-b187-5b4c63ce21f8$$0$$MetricQueryHandlerImpl.java/146$$queryMetric done ! metricId:1018 timeLine>>>
+ [TN:-- 校验配额 metricId:1018 0ms,TN:-- 指标数据查询 metricId:1018 6649ms,TN:-- log quota metricId:1018 0ms]$$
+
+
+
+ 性能优化会议内容
+ v1.1.1版本技术优化内容
+ 目标 1000行数据在SR的性能范围内无缓存直出500ms返回
+ - 限制即席查询的指标返回数量在1000，超过只返回1000，并提示结果集超过1000（业务系统通过condition拆分查询，保证即席查询的效率）
+ - metricflow编译优化：API调用采用片段拼接的方式进行sql转换，不再使用metricflow进行即时的explain（mf explain效率不稳定）
+ - stitcher优化调用过程的远程调用：尽量使用预加载数据避免远程调用
+ 远景路线
+ 即席查询(+预加载) 100ms内 无缓存直出500ms
+ - 提供大数据集交换通道，支持1000～100w行数据查询导出 预计v1.2+
+ - BFF提供指标编排功能 预计v1.2
+ - BFF预加载编排 预计v1.3
+ - join表指标支持（有限支持） 预计v1.3+
+
+

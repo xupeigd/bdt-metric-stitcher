@@ -1,0 +1,62 @@
+type CandidateValuePair {
+    name: String
+    values: [String]
+}
+
+type Rcvp {
+    code: String
+    msg: String
+    data: [CandidateValuePair]
+    debugCode: String
+    debugMessage: String
+}
+
+input Condition {
+    left: Condition
+    right: Condition
+    name: String
+    symbol: Int
+    hitValues: [String]
+}
+
+input Sort {
+    name: String!
+    asc: Boolean!
+}
+
+input Eas {
+    metricIds: [Int]
+    metrics: [String]
+    dimensions: [String]!
+    condition: Condition
+    sorts: [Sort]
+}
+
+type ColumnMeta {
+    id: Int
+    name: String
+    sqlType: Int
+}
+
+type ResultSet {
+    resultMode: Int
+    state: Int
+    msg: String
+    columnMetas: [ColumnMeta]
+    rows: [[String]]
+    columns: [[String]]
+}
+
+type MetricCatculateResp {
+    id: Int
+    sql: String
+    resultSet: ResultSet
+}
+
+type Rmcp {
+    code: String
+    msg: String
+    data: MetricCatculateResp
+    debugCode: String
+    debugMessage: String
+}

@@ -1,0 +1,9 @@
+**/.idea/
+**.iml
+**/target/
+**.class
+**/dohko-analysis.log
+**/explain.log
+**/sampler.json
+/docker-deps/libs/metric-stitcher-api/
+/docker-deps/m2config/

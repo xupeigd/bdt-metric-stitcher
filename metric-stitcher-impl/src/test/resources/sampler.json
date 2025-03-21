@@ -1,0 +1,34 @@
+{
+  "metricIds": [
+    1092
+  ],
+  "dimensions": [
+    "group_id",
+    "shop_id",
+    "order_subtype",
+    "pt"
+  ],
+  "condition": {
+    "left": {
+      "name": "pt",
+      "symbol": 0,
+      "hitValues": [
+        "20221202"
+      ]
+    },
+    "right": {
+      "name": "pt",
+      "symbol": 0,
+      "hitValues": [
+        "20221202"
+      ]
+    },
+    "symbol": 100
+  },
+  "sorts": [
+    {
+      "asc": true,
+      "name": "group_id"
+    }
+  ]
+}
